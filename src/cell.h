@@ -3,18 +3,26 @@
 #include <memory>
 #include <vector>
 
+enum Direction { none, up, down, left, right };
+
+struct Point {
+    int x, y;
+};
+
 class Cell {
 public:
     std::weak_ptr<Cell> NextCell;
 private:
-    int x, y;
-    bool isFinish = false;
+    Point point;
+    bool isStart = false;
     std::vector<std::weak_ptr<Cell>> neighboredCells;
 
 public:
-    Cell(bool isFinish, short x, short y);
+    Cell(Point point, bool isStart);
 
     void AddNeighboredCell(std::shared_ptr<Cell> cell);
 
     std::vector<std::weak_ptr<Cell>> & GetNeighboredCells();
+
+    Direction GetDirectionTo(Point point);
 };

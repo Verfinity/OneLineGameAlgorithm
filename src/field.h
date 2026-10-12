@@ -5,7 +5,7 @@
 
 class Cell;
 
-enum CellType { empty=0, cell=1, finishCell=2 };
+enum CellType { empty=0, cell=1, startCell=2 };
 
 struct ReturnPoint {
     std::weak_ptr<Cell> ReturnCell;
@@ -19,7 +19,8 @@ private:
 
     std::vector<ReturnPoint> returnPoints;
 public:
-    Field(int width, int height, CellType *cells);
+    Field(int width, int height);
 
     bool FindPath();
+    bool InitializeCells(CellType *cellTypes);
 };
